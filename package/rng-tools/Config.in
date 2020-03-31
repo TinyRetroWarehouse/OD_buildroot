@@ -1,0 +1,15 @@
+config BR2_PACKAGE_RNG_TOOLS
+	bool "rng-tools"
+	# pthread_setaffinity_np
+	depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL
+	select BR2_PACKAGE_ARGP_STANDALONE if BR2_TOOLCHAIN_USES_UCLIBC || BR2_TOOLCHAIN_USES_MUSL
+	select BR2_PACKAGE_JITTERENTROPY_LIBRARY
+	select BR2_PACKAGE_LIBSYSFS
+	select BR2_PACKAGE_OPENSSL
+	help
+	  Daemon to use hardware random number generators.
+
+	  http://sourceforge.net/projects/gkernel/
+
+comment "rng-tools needs a toolchain w/ NPTL"
+	depends on !BR2_TOOLCHAIN_HAS_THREADS_NPTL
